@@ -52,7 +52,7 @@ namespace SmartSchool_WebAPI.Controllers
         {
             try
             {
-                var result = await _repo.GetProfessoresAsyncByAlunoId(alunoId, false);
+                var result = await _repo.GetProfessoresAsyncByAlunoId(alunoId, true);
                 return Ok(result);
             }
             catch (Exception ex)

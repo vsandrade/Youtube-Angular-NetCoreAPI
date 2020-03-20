@@ -12,7 +12,7 @@
       </div>
     </div>
 
-    <form [formGroup]="alunoForm" (submit)="alunoSubmit()">
+    <form [formGroup]="alunoForm">
       <div class="form-group">
         <label for="formGroupExampleInput">Nome</label>
         <input type="text" formControlName="nome" class="form-control">
@@ -27,7 +27,7 @@
       </div>
       <div class="form-group">
         <hr>
-        <button class="btn btn-success" [disabled]="!alunoForm.valid">Enviar</button>
+        <button class="btn btn-success" (click)="saveAluno()" [disabled]="!alunoForm.valid">Enviar</button>
       </div>
     </form>
   </div>
@@ -56,7 +56,7 @@
           <td>{{aluno.telefone}}</td>
           <td>
             <div class="btn-group">
-              <button (click)="openModal(template)" class="btn btn-sm btn-outline-primary">Professores</button>
+              <button (click)="openModal(template, aluno.id)" class="btn btn-sm btn-outline-primary">Professores</button>
               <button class="btn btn-sm btn-outline-danger">Desativar</button>
             </div>
           </td>
@@ -69,7 +69,7 @@
 
 <ng-template #template>
   <div class="modal-body">
-    <app-professores></app-professores>
+    <app-professores-alunos (closeModal)="closeModal()" [professores]="profsAlunos"></app-professores-alunos>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn pull-right" aria-label="Close"
