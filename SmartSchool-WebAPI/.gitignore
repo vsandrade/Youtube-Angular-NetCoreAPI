@@ -1,6 +1,9 @@
 # See http://help.github.com/ignore-files/ for more about ignoring files.
 
 # .NET Core Project
+/bin
+/obj
+
 bin
 obj
 
