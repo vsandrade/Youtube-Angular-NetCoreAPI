@@ -16,29 +16,8 @@ import { AlunoService } from '../../services/aluno.service';
   selector: 'app-professores',
   templateUrl: './professores.component.html'
 })
-export class ProfessoresComponent implements OnInit {
+export class ProfessoresComponent {
 
   public titulo = 'Professores';
-  public professorSelecionado: Professor;
-
-  public professores$: Observable<Professor[]>;
-
-  constructor(
-    private professorService: ProfessorService,
-    private spinner: NgxSpinnerService) {}
-
-  carregarProfessores() {
-    this.spinner.show();
-    this.professores$ = this.professorService.professores$;
-    this.spinner.hide();
-  }
-
-  ngOnInit() {
-    this.carregarProfessores();
-  }
-
-  disciplinaConcat(disciplinas: Disciplina[]) {
-    return Util.nomeConcat(disciplinas);
-  }
 
 }

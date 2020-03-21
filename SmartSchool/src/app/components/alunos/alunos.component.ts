@@ -6,7 +6,7 @@ import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AlunoService } from '../../services/aluno.service';
 import { takeUntil, catchError, find } from 'rxjs/operators';
-import { Subject, Observable, EMPTY } from 'rxjs';
+import { Subject, EMPTY } from 'rxjs';
 import { ProfessorService } from '../../services/professor.service';
 import { Professor } from '../../models/Professor';
 import { ActivatedRoute } from '@angular/router';
