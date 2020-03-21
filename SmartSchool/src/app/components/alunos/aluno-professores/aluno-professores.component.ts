@@ -5,11 +5,10 @@ import { Disciplina } from 'src/app/models/Disciplina';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-professores-alunos',
-  templateUrl: './professores-alunos.component.html',
-  styleUrls: ['./professores-alunos.component.css']
+  selector: 'app-aluno-professores',
+  templateUrl: './aluno-professores.component.html'
 })
-export class ProfessoresAlunosComponent implements OnInit {
+export class AlunoProfessoresComponent implements OnInit {
 
   @Input() public professores: Professor[];
   @Output() closeModal = new EventEmitter();

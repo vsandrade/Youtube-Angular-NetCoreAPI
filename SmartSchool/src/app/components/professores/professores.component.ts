@@ -1,7 +1,7 @@
 import { Component, OnInit, TemplateRef, OnDestroy } from '@angular/core';
 import { Professor } from '../../models/Professor';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
-import { Subject } from 'rxjs';
+import { Subject, Observable } from 'rxjs';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { ToastrService } from 'ngx-toastr';
 import { ProfessorService } from '../../services/professor.service';
@@ -14,44 +14,27 @@ import { AlunoService } from '../../services/aluno.service';
 
 @Component({
   selector: 'app-professores',
-  templateUrl: './professores.component.html',
-  styleUrls: ['./professores.component.css']
+  templateUrl: './professores.component.html'
 })
-export class ProfessoresComponent implements OnInit, OnDestroy {
+export class ProfessoresComponent implements OnInit {
 
   public titulo = 'Professores';
   public professorSelecionado: Professor;
-  private unsubscriber = new Subject();
 
-  public professores: Professor[];
+  public professores$: Observable<Professor[]>;
 
   constructor(
-    private router: Router,
     private professorService: ProfessorService,
-    private toastr: ToastrService,
     private spinner: NgxSpinnerService) {}
 
   carregarProfessores() {
     this.spinner.show();
-    this.professorService.getAll()
-      .pipe(takeUntil(this.unsubscriber))
-      .subscribe((professores: Professor[]) => {
-        this.professores = professores;
-        this.toastr.success('Professores foram carregado com Sucesso!');
-      }, (error: any) => {
-        this.toastr.error('Professores não carregados!');
-        console.log(error);
-      }, () => this.spinner.hide()
-    );
+    this.professores$ = this.professorService.professores$;
+    this.spinner.hide();
   }
 
   ngOnInit() {
     this.carregarProfessores();
-  }
-
-  ngOnDestroy(): void {
-    this.unsubscriber.next();
-    this.unsubscriber.complete();
   }
 
   disciplinaConcat(disciplinas: Disciplina[]) {

@@ -32,7 +32,8 @@
     </form>
   </div>
 
-  <div [ngClass]="{'col-sm-6': alunoSelecionado, 'col-sm-12': !alunoSelecionado}">
+  <div *ngIf="alunos$ | async as alunos"
+    [ngClass]="{'col-sm-6': alunoSelecionado, 'col-sm-12': !alunoSelecionado}">
     <app-titulo [titulo]="titulo"></app-titulo>
 
     <table class="table table-hover">
@@ -69,7 +70,7 @@
 
 <ng-template #template>
   <div class="modal-body">
-    <app-professores-alunos (closeModal)="closeModal()" [professores]="profsAlunos"></app-professores-alunos>
+    <app-aluno-professores (closeModal)="closeModal()" [professores]="profsAlunos"></app-aluno-professores>
   </div>
   <div class="modal-footer">
     <button type="button" class="btn pull-right" aria-label="Close"

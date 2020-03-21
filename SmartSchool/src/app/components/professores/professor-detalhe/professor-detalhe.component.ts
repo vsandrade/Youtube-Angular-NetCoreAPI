@@ -12,8 +12,7 @@ import { Aluno } from 'src/app/models/Aluno';
 
 @Component({
   selector: 'app-professor-detalhe',
-  templateUrl: './professor-detalhe.component.html',
-  styleUrls: ['./professor-detalhe.component.css']
+  templateUrl: './professor-detalhe.component.html'
 })
 export class ProfessorDetalheComponent implements OnInit, OnDestroy {
 

@@ -4,11 +4,10 @@ import { Util } from 'src/app/util/util';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-alunos-professores',
-  templateUrl: './alunos-professores.component.html',
-  styleUrls: ['./alunos-professores.component.css']
+  selector: 'app-professor-alunos',
+  templateUrl: './professor-alunos.component.html'
 })
-export class AlunosProfessoresComponent implements OnInit {
+export class ProfessorAlunosComponent implements OnInit {
 
   @Input() public alunos: Aluno[];
   @Output() closeModal = new EventEmitter();

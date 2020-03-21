@@ -3,19 +3,24 @@ import { HttpClient } from '@angular/common/http';
 import { Professor } from '../models/Professor';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { SharedService } from './shared.service';
+import { tap, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ProfessorService {
+export class ProfessorService extends SharedService  {
 
   baseURL = `${environment.mainUrlAPI}professor`;
 
-  constructor(private http: HttpClient) { }
+  constructor(private http: HttpClient) {
+    super();
+   }
 
-  getAll(): Observable<Professor[]> {
-    return this.http.get<Professor[]>(this.baseURL);
-  }
+  professores$ = this.http.get<Professor[]>(this.baseURL)
+    .pipe(
+      catchError(this.handleError)
+    );
 
   getById(id: number): Observable<Professor> {
     return this.http.get<Professor>(`${this.baseURL}/${id}`);
