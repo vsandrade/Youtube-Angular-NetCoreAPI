@@ -5,7 +5,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { NgxSpinnerService } from 'ngx-spinner';
 import { AlunoService } from '../../services/aluno.service';
-import { takeUntil, catchError, find } from 'rxjs/operators';
+import { takeUntil, catchError, map } from 'rxjs/operators';
 import { Subject, EMPTY } from 'rxjs';
 import { ProfessorService } from '../../services/professor.service';
 import { Professor } from '../../models/Professor';
@@ -83,11 +83,12 @@ export class AlunosComponent implements OnInit, OnDestroy {
     const id = +this.route.snapshot.paramMap.get('id');
 
     if (id > 0) {
-      this.alunos$.subscribe(
-        alunos => {
-          this.alunoSelect(alunos.find(aluno => aluno.id === id));
-        },
-        err => console.log(err)
+      this.alunos$.pipe(
+        map(alunos =>
+          this.alunoSelect(
+            alunos.find(aluno => aluno.id === id)
+          )
+        )
       );
     }
 
